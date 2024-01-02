@@ -1,12 +1,9 @@
 from pydantic import BaseModel, Field
+import uuid
 
 
 class User(BaseModel):
-    id: int
+    id: str = Field(default_factory=uuid.uuid4, alias="_id")
     name: str
     email: str
-    isDisabled: bool
-
-
-class UserDb(User):
     password: str

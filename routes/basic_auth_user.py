@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from models.user import User, UserDb
+from models.user import User
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 
