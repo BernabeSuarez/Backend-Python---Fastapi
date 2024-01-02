@@ -18,7 +18,7 @@ async def get_users():
 # get con path
 @router.get("/user/{id}")
 async def get_one_user(id: str):
-    data = db.users.find_one({"_id" == id})
+    data = db.users.find_one({"_id": id})
     return data
 
 
