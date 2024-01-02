@@ -5,7 +5,8 @@ class User(BaseModel):
     id: int
     name: str
     email: str
+    isDisabled: bool
+
+
+class UserDb(User):
     password: str
-    # firstName: str
-    # lastName: str
-    # isVerified: bool = Field(default=False)

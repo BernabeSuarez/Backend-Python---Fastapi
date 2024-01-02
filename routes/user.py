@@ -1,18 +1,17 @@
 from fastapi import APIRouter
 from models.user import User
+from db.client import client
+from schemas.user_schema import user_schema
 
 router = APIRouter()
 
-user_list = [
-    User(id=1, name="juan", email="juan@gmail.com", password="12345678"),
-    User(id=2, name="jorge", email="jorge@gmail.com", password="12345678"),
-    User(id=3, name="jose", email="jose@gmail.com", password="12345678"),
-]
+db = client.get_database("fastapi")
 
 
 @router.get("/users")
 async def get_users():
-    return user_list
+    data = db.users.find()
+    return user_schema(data)
 
 
 def search_users(id):
@@ -39,10 +38,10 @@ async def get_one_user(id: int):
 # post
 
 
-@router.post("/create-user")
-async def create_user(user: User):
-    # Agregar un nuevo registro a la lista de usuarios
-    if type(search_users(user.id)) == User:  # comprueba si el id ya existe
-        return {"message": "El usuario ya existe"}
-    else:
-        user_list.append(user)
+# @router.post("/create-user")
+# async def create_user(user: User):
+#     # Agregar un nuevo registro a la lista de usuarios
+#     if type(search_users(user.id)) == User:  # comprueba si el id ya existe
+#         return {"message": "El usuario ya existe"}
+#     else:
+#         user_list.append(user)
